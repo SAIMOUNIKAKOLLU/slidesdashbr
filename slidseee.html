@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Images Form</title>
+    <style>
+        /* Style for the image carousel */
+        .carousel-container {
+            position: relative;
+            max-width: 500px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+        .carousel-slide img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Style for the form */
+        .form-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f2f2f2;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="carousel-container">
+    <div class="carousel-slide" id="carousel-slide">
+        <img src="" alt="pexels-panditwiguna-3401403">
+        <img src="pexels-rdne-8500309.jpg" alt="Image 2">
+        <img src="pexels-expressivestanley-1454360.jpg" alt="Image 3">
+    </div>
+    <div class="carousel-controls">
+        <button class="carousel-button" onclick="prevSlide()">❮</button>
+        <button class="carousel-button" onclick="nextSlide()">❯</button>
+    </div>
+</div>
+
+<div class="form-container">
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll("#carousel-slide img");
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        const slideWidth = slides[0].clientWidth;
+        document.getElementById("carousel-slide").style.transform = translateX(${-index * slideWidth}px);
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        showSlide(currentIndex);
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        showSlide(currentIndex);
+    }
+
+    // Auto-slide every 3 seconds
+    setInterval(nextSlide, 3000);
+</script>
+
+</body>
+</html>
